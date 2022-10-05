@@ -1,11 +1,11 @@
-import Header from "../components/Header";
+import Format from "../layout/Format";
 
 export default function Home() {
   return (
     <>
-      <div>
-        <Header />
-      </div>
+      <Format>
+        <h1>Main Content</h1>
+      </Format>
     </>
   );
 }
