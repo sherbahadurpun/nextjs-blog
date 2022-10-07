@@ -1,9 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import Author from "./_child/Author";
 
 export default function Section1() {
+  const bg = {
+    background: "url('/images/banner.png') no-repeat",
+    backgroundPosition: "right",
+  };
+
   return (
-    <section className="py-16 ">
+    <section className="py-16" style={bg}>
       <div className="container mx-auto md:px-20">
         <h1 className="font-bold text-4xl pb-12 text-center">Trending</h1>
 
@@ -47,7 +53,7 @@ function slide() {
           text by the name of Lorem Ipsum decided to leave for the far World of
           Grammar.
         </p>
-        <h1>author</h1>
+        <Author />
       </div>
     </div>
   );
