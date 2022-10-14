@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Author from "../../components/_child/Author";
+import Related from "../../components/_child/Related";
 import Format from "../../layout/Format";
 
 export default function Page() {
@@ -49,6 +50,7 @@ export default function Page() {
             </p>
           </div>
         </div>
+        <Related />
       </section>
     </Format>
   );
