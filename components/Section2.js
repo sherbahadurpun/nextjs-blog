@@ -26,7 +26,7 @@ export default function Section2() {
 }
 
 function Post({ data }) {
-  const { id, title, category, img, published, author } = data;
+  const { title, category, img, published, author } = data;
   return (
     <div className="item">
       <div className="images">
@@ -50,7 +50,7 @@ function Post({ data }) {
           </Link>
           <Link href={"/"}>
             <a className="text-gray-800 hover:text-gray-600">
-              {published || "Unknown"}
+              - {published || "Unknown"}
             </a>
           </Link>
         </div>

@@ -1,29 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
+import fetcher from "../lib/fetcher";
 import Author from "./_child/Author";
+import Error from "./_child/Error";
+import Spinner from "./_child/Spinner";
 
 export default function Section4() {
+  const { data, isLoading, isError } = fetcher("api/posts");
+
+  if (isLoading) return <Spinner />;
+  if (isError) return <Error />;
   return (
     <section className="container mx-auto md:px-20 py-16">
       <div className="grid lg:grid-cols-2">
         <div className="item">
           <h1 className="font-bold text-4xl py-12">Business</h1>
           <div className="flex flex-col gap-6">
-            {/* Post */}
-            {post()}
-            {post()}
-            {post()}
-            {post()}
+            {data[1] ? <Post data={data[1]}></Post> : null}
+            {data[2] ? <Post data={data[2]}></Post> : null}
+            {data[3] ? <Post data={data[3]}></Post> : null}
           </div>
         </div>
         <div className="item">
           <h1 className="font-bold text-4xl py-12">Travel</h1>
           <div className="flex flex-col gap-6">
-            {/* Post */}
-            {post()}
-            {post()}
-            {post()}
-            {post()}
+            {data[4] ? <Post data={data[4]}></Post> : null}
+            {data[5] ? <Post data={data[5]}></Post> : null}
+            {data[2] ? <Post data={data[2]}></Post> : null}
           </div>
         </div>
       </div>
@@ -31,7 +34,9 @@ export default function Section4() {
   );
 }
 
-function post() {
+function Post({ data }) {
+  const { title, category, img, published, author } = data;
+
   return (
     <div className="flex gap-5">
       <div className="image flex flex-col justify-start">
@@ -39,7 +44,7 @@ function post() {
           <a>
             <Image
               className="rounded"
-              src={"/images/img1.jpg"}
+              src={img || ""}
               width={300}
               height={250}
             />
@@ -50,21 +55,23 @@ function post() {
         <div className="catg">
           <Link href={"/"}>
             <a className="text-orange-600 hover:text-orange-800">
-              Business, Travel
+              {category || "No Category"}
             </a>
           </Link>
           <Link href={"/"}>
-            <a className="text-gray-800 hover:text-gray-600">- July 3, 2022</a>
+            <a className="text-gray-800 hover:text-gray-600">
+              - {published || "No Date"}
+            </a>
           </Link>
         </div>
         <div className="title">
           <Link href={"/"}>
             <a className="text-xl font-bold text-gray-800 hover:text-gray-600 ">
-              Your most unhappy customers are your greatest source of learning
+              {title || "No Title"}
             </a>
           </Link>
         </div>
-        <Author />
+        {author ? <Author /> : null}
       </div>
     </div>
   );
