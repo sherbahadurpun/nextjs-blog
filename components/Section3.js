@@ -16,7 +16,14 @@ export default function Section3() {
       <h1 className="font-bold text-4xl py-12 text-center">Most Popular</h1>
 
       {/* Swiper Slide */}
-      <Swiper slidesPerView={2}>
+      <Swiper
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+        }}
+      >
         {data.map((value, index) => (
           <SwiperSlide key={index}>
             <Post data={value}></Post>
@@ -28,12 +35,12 @@ export default function Section3() {
 }
 
 function Post({ data }) {
-  const { title, description, category, img, published, author } = data;
+  const { id, title, description, category, img, published, author } = data;
 
   return (
     <div className="grid">
       <div className="images">
-        <Link href={"/"}>
+        <Link href={`/posts/${id}`}>
           <a>
             <Image src={img || ""} width={600} height={400} />
           </a>
@@ -41,26 +48,26 @@ function Post({ data }) {
       </div>
       <div className="info flex justify-center flex-col py-4">
         <div className="catg">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-orange-600 hover:text-orange-800">
               {category || "No Category"}
             </a>
           </Link>
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-gray-800 hover:text-gray-600">
               - {published || "No Date"}
             </a>
           </Link>
         </div>
         <div className="title">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-3xl md:text-4xl font-bold text-gray-800 hover:text-gray-600 ">
               {title || "No Title"}
             </a>
           </Link>
         </div>
         <p className="text-gray-500 py-3 ">{description || "No Description"}</p>
-        {author ? <Author /> : null}
+        {author ? <Author {...author}></Author> : <></>}
       </div>
     </div>
   );

@@ -35,12 +35,12 @@ export default function Section4() {
 }
 
 function Post({ data }) {
-  const { title, category, img, published, author } = data;
+  const { id, title, category, img, published, author } = data;
 
   return (
     <div className="flex gap-5">
       <div className="image flex flex-col justify-start">
-        <Link href={"/"}>
+        <Link href={`/posts/${id}`}>
           <a>
             <Image
               className="rounded"
@@ -53,25 +53,25 @@ function Post({ data }) {
       </div>
       <div className="info flex flex-col justify-center">
         <div className="catg">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-orange-600 hover:text-orange-800">
               {category || "No Category"}
             </a>
           </Link>
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-gray-800 hover:text-gray-600">
               - {published || "No Date"}
             </a>
           </Link>
         </div>
         <div className="title">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-xl font-bold text-gray-800 hover:text-gray-600 ">
               {title || "No Title"}
             </a>
           </Link>
         </div>
-        {author ? <Author /> : null}
+        {author ? <Author {...author}></Author> : <></>}
       </div>
     </div>
   );

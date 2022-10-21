@@ -26,11 +26,11 @@ export default function Section2() {
 }
 
 function Post({ data }) {
-  const { title, category, img, published, author } = data;
+  const { id, title, category, img, published, author } = data;
   return (
     <div className="item">
       <div className="images">
-        <Link href={"/"}>
+        <Link href={`/posts/${id}`}>
           <a>
             <Image
               className="rounded"
@@ -43,19 +43,19 @@ function Post({ data }) {
       </div>
       <div className="info flex justify-center flex-col py-4">
         <div className="catg">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-orange-600 hover:text-orange-800">
               {category || "Unknown"}
             </a>
           </Link>
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-gray-800 hover:text-gray-600">
               - {published || "Unknown"}
             </a>
           </Link>
         </div>
         <div className="title">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <a className="text-xl font-bold text-gray-800 hover:text-gray-600 ">
               {title || "Title"}
             </a>
@@ -67,7 +67,7 @@ function Post({ data }) {
           text by the name of Lorem Ipsum decided to leave for the far World of
           Grammar.
         </p>
-        {author ? <Author /> : null}
+        {author ? <Author {...author}></Author> : <></>}
       </div>
     </div>
   );
